@@ -1,0 +1,59 @@
+<div class="container mt-4">
+  <div class="row" *ngIf="!showConfirmation">
+    <div class="col-md-6 offset-md-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Publier un résultat</h5>
+          <form [formGroup]="fileForm" (ngSubmit)="onSubmit()" [class.loading]="isLoading">
+            <div class="input-group">
+              <input type="file" class="form-control custom-file-input" id="customFile"
+                aria-describedby="inputGroupFileAddon" formControlName="file" (change)="onFileChange($event)"
+                [disabled]="isLoading">
+              <label class="input-group-text" for="customFile">
+                <img src="../../assets/images/fileInput.png" alt="Logo" width="24" height="24">
+                choisir un fichier
+              </label>
+            </div>
+            <div
+              *ngIf="fileForm.controls['file'].touched && fileForm.controls['file'].invalid && fileForm.controls['file'].errors"
+              class="text-danger">
+              <ng-container *ngIf="fileForm.controls['file'].errors['required']">
+                Seul les fichiers Excel (.xlsx and .xls) sont permis
+              </ng-container>
+            </div>
+            <div class="mt-4">
+              <button type="button" class="btn btn-danger me-2" (click)="onCancel()"
+                [disabled]="isLoading">Annuler</button>
+              <button type="submit" class="btn btn-info" [disabled]="fileForm.invalid || isLoading">Publier</button>
+            </div>
+            <div *ngIf="isLoading" class="loading-overlay">
+              <div class="loading-spinner">
+                <div class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <p class="text-danger">{{ displayedMessage }}</p>
+    </div>
+  </div>
+
+  <div *ngIf="showConfirmation" class="col-md-6 offset-md-3">
+    <div class="card text-center bg-custom">
+      <div class="card-body">
+        <h5 class="card-title text-success">Succès !!!</h5>
+        <p class="card-text text-success">Le fichier a bien été enregistré.</p>
+        <div class="d-flex justify-content-center">
+          <img src="../../assets/images/success-icon.png" alt="Success Icon">
+        </div>
+        <div class="mt-4">
+          <button class="btn btn-success m-3" (click)="uploadAgain()">Publier encore</button>
+          <button class="btn btn-secondary" routerLink="/examens">Consultez des résultats</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

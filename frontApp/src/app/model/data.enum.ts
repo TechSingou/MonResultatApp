@@ -1,0 +1,115 @@
+export enum ExamenEnum{
+    BAC_TEC = 'BAC TECHNIQUE',
+    BAC_GEN = 'BAC GENERAL',
+    DEF = 'DEF',
+    CAP = 'CAP',
+    BT1 = 'BT1',
+    BT2 = 'BT2',
+    BTAGRO = 'BT AGRO'
+}
+
+export enum ExamenCentreDeCorrectionBAC{
+    BKO_RV_DROITE = 'BAMAKO RIVE DROITE',
+    BKO_RV_GAUCHE = 'BAMAKO RIVE GAUCHE',
+    KATI = 'KATI',
+    KAYES = 'KAYES',
+    KOULIKORO = 'KOULIKORO',
+    SIKASSO = 'SIKASSO',
+    SEGOU = 'SEGOU',
+    SAN = 'SAN',
+    KOUTIALA = 'KOUTIALA',
+    MOPTI = 'MOPTI',
+    GAO = 'GAO',
+    TOMBOUCTOU = 'TOMBOUCTOU',
+    BASSIKOUNOU = 'BASSIKOUNOU'
+}
+
+export enum ExamenCentreDeCorrectionDEF{
+    BKO_RV_DROITE = 'BAMAKO RIVE DROITE',
+    BKO_RV_GAUCHE = 'BAMAKO RIVE GAUCHE',
+    KATI = 'KATI',
+    KAYES = 'KAYES',
+    KITA = 'KITA',
+    KOULIKORO = 'KOULIKORO',
+    SIKASSO = 'SIKASSO',
+    SEGOU = 'SEGOU',
+    NIORO = 'NIORO',
+    SAN = 'SAN',
+    KOUTIALA = 'KOUTIALA',
+    MOPTI = 'MOPTI',
+    GAO = 'GAO',
+    TOMBOUCTOU = 'TOMBOUCTOU',
+    KIDAL = 'KIDAL',
+    BOUGOUNI = 'BOUGOUNI',
+    DIOILA = 'DIOILA',
+    DOUENZAN = 'DOUENZAN',
+    MENAKA = 'MENAKA',
+    KENIEBA = 'KENIEBA',
+}
+
+export enum ExamenCentreDeCorrectionCAP_BT1_BT2{
+    BKO_RV_DROITE = 'BAMAKO RIVE DROITE',
+    BKO_RV_GAUCHE = 'BAMAKO RIVE GAUCHE',
+    KATI = 'KATI',
+    KITA = 'KITA',
+    SAN = 'SAN',
+    BADIANGARA = 'BADIANGARA',
+    KOUTIALA = 'KOUTIALA',
+    MOPTI = 'MOPTI',
+    BOUGOUNI = 'BOUGOUNI',
+    SIKASSO = 'SIKASSO',
+    DOUENTZA = 'DOUENTZA'
+}
+
+
+export enum SerieBacGeneral{
+    TSE = 'TSE',
+    TSEXP = 'TSEXP',
+    TSECO = 'TSECO',
+    TSS = 'TSS',
+    TLL = 'TLL'
+}
+
+export enum SerieBacTechnique{
+    STG_CF = 'STG-CF',
+    STG_GCO = 'STG-GCO',
+    STI_GC = 'STI-GC',
+    STI_GEL = 'STI-GEL',
+    STI_GELN = 'STI-GELN',
+    STI_GM = 'STI-GM',
+}
+
+export enum ConcoursEnum{
+  ENTRE_ENI_ABT = 'ENTRE_ENI_ABT',
+  ENTRE_IFM = 'ENTRE_IFM',
+  ENTRE_ENSUP = 'ENTRE_ENSUP'
+}
+
+export enum EniSpecialite{
+  GENIE_CIVIL = 'GENIE_CIVIL',
+  GENIE_INFORMATIQUE_TELECOMS = 'GENIE_INFORMATIQUE_TELECOMS',
+  GENE_ELECTRIQUE_ELECTROTECHNIQUE_AUTOMATISME = "GENE_ELECTRIQUE_ELECTROTECHNIQUE_AUTOMATISME",
+  GENIE_MECANIQUE_ENERGIE = 'GENIE_MECANIQUE_ENERGIE',
+  GEODESIE_SCIENCES_GEO = 'GEODESIE_SCIENCES_GEO',
+  GEOLOGIE = 'GEOLOGIE'
+}
+
+export enum IFMNiveauEnum{
+  BAC = 'BAC',
+  DEF = 'DEF'
+}
+
+export enum ENSUPNiveau{
+  BAC = 'BAC ENSUP',
+  MASTER = 'MASTER'
+}
+
+export enum CentreIFM{
+  KITA = 'KITA',
+  NIONO = 'NIONO',
+  KATI = 'KATI',
+  SEVARE = 'SEVARE',
+  KOUTIALA = 'KOUTIALA',
+  BOUGOUNI ='BOUGOUNI',
+  KAYES = 'KAYES'
+}

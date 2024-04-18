@@ -1,0 +1,102 @@
+<div class="mt-4 container">
+  <ng-template #errors>
+    <div class="text-danger">
+      {{errorMessage}}
+    </div>
+  </ng-template>
+  <div class="card">
+    <div class="card-header">Consultez vos resultats</div>
+    <div class="card-body">
+      <div class="mb-3">
+        <form [formGroup]="searchForm" (ngSubmit)="submitSearchForm()">
+
+          <div class="row">
+            <div class="col-md-2 mb-2">
+              <label class="col-form-label col-form-label-sm">Type concours</label>
+              <select (change)="onConcoursChange($event)" class="form-select"
+                      aria-label="Default select example" formControlName="typeConcours">
+                <option *ngFor="let cc of concoursEnumValues" [value]="cc">{{ cc }}</option>
+              </select>
+              <div *ngIf="isSearchFormsubmitted && searchForm.invalid && searchForm.controls['typeConcours'].errors"
+                   class="text-danger">
+                <ng-container *ngIf="searchForm.controls['typeConcours'].errors['required']">
+                  <small>champ obligatoire*</small>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-md-2 mb-2">
+              <label class="col-form-label col-form-label-sm">Année</label>
+              <select class="form-select" aria-label="Default select example" formControlName="annee">
+                <!--<option value="">Année</option>-->
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+              </select>
+              <div *ngIf="isSearchFormsubmitted && searchForm.invalid && searchForm.controls['annee'].errors"
+                   class="text-danger">
+                <ng-container *ngIf="searchForm.controls['annee'].errors['required']">
+                  <small>champ obligatoire*</small>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-md-2 mb-2">
+              <label class="col-form-label col-form-label-sm">Niveau</label>
+              <select (change)="onNiveauChange($event)" class="form-select" aria-label="Default select example" formControlName="niveau"
+                      [required]="isNiveauRequired">
+                <option disabled selected value="">{{ getDefaultSelectedNiveau() }}</option>
+                <option *ngFor="let niveau of niveauList" [value]="niveau">{{niveau}}</option>
+              </select>
+              <div *ngIf="isSearchFormsubmitted && searchForm.invalid && searchForm.controls['niveau'].errors"
+                   class="text-danger">
+                <ng-container *ngIf="searchForm.controls['niveau'].errors['required']">
+                  <small>champ obligatoire*</small>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-md-2 mb-2">
+              <label class="col-form-label col-form-label-sm">Centre de correction</label>
+              <select class="form-select" aria-label="Default select example" formControlName="centre"
+                      [required]="isCentreRequired">
+                <!--<option value="">Centre de correction</option>-->
+                <option *ngFor="let centre of centreList" [value]="centre">{{centre}}</option>
+              </select>
+              <div *ngIf="isSearchFormsubmitted && searchForm.invalid && searchForm.controls['centre'].errors"
+                   class="text-danger">
+                <ng-container *ngIf="searchForm.controls['centre'].errors['required']">
+                  <small>champ obligatoire*</small>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-md-2 mb-2">
+              <label class="col-form-label col-form-label-sm">Spécialité</label>
+              <select class="form-select" aria-label="Default select example" formControlName="specialite"
+                      [required]="isSpecialiteRequired">
+                <!--<option selected>Série</option>-->
+                <option *ngFor="let specialite of specialiteList" [value]="specialite">{{specialite}}</option>
+              </select>
+              <div *ngIf="isSearchFormsubmitted && searchForm.invalid && searchForm.controls['specialite'].errors"
+                   class="text-danger">
+                <ng-container *ngIf="searchForm.controls['specialite'].errors['required']">
+                  <small>champ obligatoire*</small>
+                </ng-container>
+              </div>
+            </div>
+
+            <div class="col-md-2 mb-2">
+              <label class="col-form-label col-form-label-sm">N° place</label>
+              <input type="text" class="form-control" id="exampleFormControlInput1"
+                     placeholder="Optionnel" formControlName="numPlace">
+            </div>
+
+            <div class="col-md-2 mb-2">
+              <button type="submit" class="btn btn-info">Voir résultat</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>

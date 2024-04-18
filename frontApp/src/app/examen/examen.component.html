@@ -1,0 +1,175 @@
+<div class="mt-4 container">
+    <nav class="m-2 p-2 border border-info">
+        <button class="btn btn-outline-info" routerLink="/addResultatExamen"><span class="m-2"><i
+                    class="bi bi-cloud-plus"></i></span>Publier</button>
+    </nav>
+    <ng-template #errors>
+        <div class="text-danger">
+            {{errorMessage}}
+        </div>
+    </ng-template>
+    <div class="card">
+        <div class="card-header">Consultez vos resultats</div>
+        <div class="card-body">
+            <div class="mb-3">
+                <form [formGroup]="searchForm" (ngSubmit)="submitSearchForm()">
+
+                    <div class="row">
+                        <div class="col-md-2 mb-2">
+                            <label class="col-form-label col-form-label-sm">Type examen</label>
+                            <select (change)="onExamenChange($event)" class="form-select"
+                                aria-label="Default select example" formControlName="examen">
+                                <!--<option value="">Examen</option>-->
+                                <option *ngFor="let examen of examenEnum" [value]="examen">{{ examen }}</option>
+                            </select>
+                            <div *ngIf="isSearchFormsubmitted && searchForm.invalid && searchForm.controls['examen'].errors"
+                                class="text-danger">
+                                <ng-container *ngIf="searchForm.controls['examen'].errors['required']">
+                                    <small>champ obligatoire*</small>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="col-md-2 mb-2">
+                            <label class="col-form-label col-form-label-sm">Session</label>
+                            <select class="form-select" aria-label="Default select example" formControlName="annee">
+                                <!--<option value="">Année</option>-->
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
+                                <option value="2020">2020</option>
+                            </select>
+                            <div *ngIf="isSearchFormsubmitted && searchForm.invalid && searchForm.controls['annee'].errors"
+                                class="text-danger">
+                                <ng-container *ngIf="searchForm.controls['annee'].errors['required']">
+                                    <small>champ obligatoire*</small>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="col-md-2 mb-2">
+                            <label class="col-form-label col-form-label-sm">Centre de correction</label>
+                            <select class="form-select" aria-label="Default select example" formControlName="centre"
+                                [required]="isCentreRequired">
+                                <!--<option value="">Centre de correction</option>-->
+                                <option *ngFor="let centre of centreDeCorrection" [value]="centre">{{centre}}</option>
+                            </select>
+                            <div *ngIf="isSearchFormsubmitted && searchForm.invalid && searchForm.controls['centre'].errors"
+                                class="text-danger">
+                                <ng-container *ngIf="searchForm.controls['centre'].errors['required']">
+                                    <small>champ obligatoire*</small>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="col-md-2 mb-2">
+                            <label class="col-form-label col-form-label-sm">Série</label>
+                            <select class="form-select" aria-label="Default select example" formControlName="serie"
+                                [required]="IsSerieRequired">
+                                <!--<option selected>Série</option>-->
+                                <option *ngFor="let serie of serieBac" [value]="serie">{{serie}}</option>
+                            </select>
+                            <div *ngIf="isSearchFormsubmitted && searchForm.invalid && searchForm.controls['serie'].errors"
+                                class="text-danger">
+                                <ng-container *ngIf="searchForm.controls['serie'].errors['required']">
+                                    <small>champ obligatoire*</small>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 mb-2">
+                            <label class="col-form-label col-form-label-sm">N° place</label>
+                            <input type="text" class="form-control" id="exampleFormControlInput1"
+                                placeholder="Optionnel" formControlName="numPlace">
+                        </div>
+
+                        <div class="col-md-2 mb-2">
+                            <button type="submit" class="btn btn-info">Voir résultat</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <ng-container *ngIf="candidat; else listCandidat">
+                <!-- Display data when receivedData is not null -->
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">N° Place</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Prenom</th>
+                                <th scope="col">Sexe</th>
+                                <th scope="col">Date Naissance</th>
+                                <th scope="col">Lieu Naissance</th>
+                                <th scope="col">Etablissement</th>
+                                <th scope="col">Mention</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-success">{{ candidat.numPlace }}</td>
+                                <td>{{ candidat.nom }}</td>
+                                <td>{{ candidat.prenom }}</td>
+                                <td>{{ candidat.sexe }}</td>
+                                <td>{{ candidat.dateNaissance}}</td>
+                                <td>{{ candidat.lieuNaissance }}</td>
+                                <td>{{ candidat.etablisement }}</td>
+                                <td>{{ candidat.mention }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </ng-container>
+
+            <ng-template #listCandidat>
+                <div *ngIf="candidatList; else noResult">
+                    <!-- Display data when receivedData is not null -->
+                    <br>
+                    <P>Liste des admins <span class="text-primary">{{ searchForm.get('serie')?.value}}</span>, <span
+                            class="text-primary"> {{ searchForm.get('examen')?.value}}</span> session <span
+                            class="text-primary">{{ searchForm.get('annee')?.value}}</span>, pole de correction de <span
+                            class="text-primary">{{ searchForm.get('centre')?.value}}</span> </P>
+                    <hr>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">N° Place</th>
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">Prenom</th>
+                                    <th scope="col">Sexe</th>
+                                    <th scope="col">Date Naissance</th>
+                                    <th scope="col">Lieu Naissance</th>
+                                    <th scope="col">Etablissement</th>
+                                    <th scope="col">Mention</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let candidat of pageCandidats">
+                                    <td class="text-success">{{ candidat.numPlace }}</td>
+                                    <td>{{ candidat.nom }}</td>
+                                    <td>{{ candidat.prenom }}</td>
+                                    <td>{{ candidat.sexe }}</td>
+                                    <td>{{ candidat.dateNaissance}}</td>
+                                    <td>{{ candidat.lieuNaissance }}</td>
+                                    <td>{{ candidat.etablisement }}</td>
+                                    <td>{{ candidat.mention }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <ul class="nav nav-pills">
+                            <li *ngFor="let item of [].constructor(this.totalPages); let i = index">
+                                <a (click)="gotoPage(i)"
+                                    [ngClass]="i==currentPage?'btn-info text-white':'btn-outline-info'"
+                                    class="btn ms-1 mt-1">{{i}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <ng-template #noResult>
+                    <!-- Display message when receivedData is null -->
+                    <p class="text-danger">{{ displayedMessage }}</p>
+                </ng-template>
+            </ng-template>
+        </div>
+
+    </div>
+
+</div>
